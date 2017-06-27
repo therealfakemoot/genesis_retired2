@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-
 	"github.com/tbogdala/noisey"
+	"github.com/therealfakemoot/genesis"
+	"math/rand"
 )
 
 func main() {

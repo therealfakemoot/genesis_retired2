@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package genesis
 
 type Point map[string]int
 
@@ -9,5 +7,4 @@ type Mover interface {
 }
 
 func main() {
-	fmt.Println("vim-go")
 }
