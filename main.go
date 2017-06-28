@@ -1,12 +1,7 @@
-package genesis
+package main
 
-import (
-	"cmds"
-	"fmt"
-	"github.com/tbogdala/noisey"
-	"github.com/therealfakemoot/cmd"
-	"math/rand"
-)
+import "github.com/therealfakemoot/genesis/cmd"
 
 func main() {
+	cmd.Execute()
 }
