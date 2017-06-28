@@ -1,4 +1,4 @@
-package genesis
+package main
 
 type Point map[string]int
 

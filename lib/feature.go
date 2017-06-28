@@ -1,4 +1,4 @@
-package genesis
+package main
 
 type Feature interface {
 	Walk(func(*Feature) error) error
