@@ -3,8 +3,8 @@ go:
   - 1.8
 install:
   - go get github.com/apex/log
-	- go get github.com/spf13/viper
-	- go get github.com/spf13/cobra
+  - go get github.com/spf13/viper
+  - go get github.com/spf13/cobra
   - go get -v .
   - go get github.com/golang/lint/golint
 script:
