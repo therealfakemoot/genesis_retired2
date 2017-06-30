@@ -1,6 +1,3 @@
-package genesis
+package main
 
-import "github.com/spf13/viper"
-
-func main() {
-}
+//import "github.com/spf13/viper"
