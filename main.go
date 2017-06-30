@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/apex/log"
 	cmd "github.com/therealfakemoot/genesis/cmd"
-	"github.com/therealfakemoot/genesis/lib"
+	"github.com/therealfakemoot/genesis/src"
 )
 
 func main() {
