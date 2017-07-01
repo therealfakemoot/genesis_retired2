@@ -7,9 +7,10 @@ import (
 )
 
 func main() {
+	log.Info("Starting genesis")
 
 	genesis.SetupLogging()
-	log.Info("Starting genesis")
+	genesis.LoadConfig()
 	//logCtx := log.WithFields(log.Fields{
 	//"name": "butts",
 	//})

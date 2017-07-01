@@ -33,10 +33,6 @@ func (l *Feature) Move(p *Point) (*Feature, error) {
 	return moveFeature(l, p)
 }
 
-func (l *Feature) Set(key string, value interface{}) error {
-	return nil
-}
-
 func moveFeature(l Mover, p *Point) (*Feature, error) {
 	return nil, nil
 }
