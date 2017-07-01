@@ -1,28 +1,42 @@
 package genesis
 
-type Feature interface {
-	Walk(func(*Feature) error) error
-	Set(string, interface{}) error
+type Movable interface {
+	Move(p *Point) (*Feature, error)
 }
 
-type Location struct {
+type Walkable interface {
+	Walk(func(*Feature) error) error
+}
+
+func NewFeature(locMap map[string]interface{}, args ...interface{}) (*Feature, error) {
+	l := new(Feature)
+
+	//for k, v := range args["LocMap"] {
+	//locMap[k] = v
+	//}
+	l.LocMap = locMap
+
+	return l, nil
+}
+
+type Feature struct {
 	Name     string
-	Location Point
+	LocMap   Point
 	Features []Feature
 }
 
-func (l *Location) New() (Location, error) {
-	return Location{}, nil
-}
-
-func (l *Location) Move(p *Point) (*Location, error) {
-	return moveLocation(l, p)
-}
-
-func (l *Location) Set(key string, value interface{}) error {
+func (l *Feature) Walk(func(*Feature), error) error {
 	return nil
 }
 
-func moveLocation(l Mover, p *Point) (*Location, error) {
+func (l *Feature) Move(p *Point) (*Feature, error) {
+	return moveFeature(l, p)
+}
+
+func (l *Feature) Set(key string, value interface{}) error {
+	return nil
+}
+
+func moveFeature(l Mover, p *Point) (*Feature, error) {
 	return nil, nil
 }

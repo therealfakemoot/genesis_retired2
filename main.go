@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/apex/log"
+	genesis "github.com/therealfakemoot/genesis/app"
 	cmd "github.com/therealfakemoot/genesis/cmd"
-	"github.com/therealfakemoot/genesis/src"
 )
 
 func main() {
