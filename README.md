@@ -11,6 +11,6 @@ A Golang framework for procedurally generating story elements and content.
 ## Health check
 | Branch | Status |
 | ------ | ------ |
-|`Go Report`| [![Go Report](https://goreportcard.com/badge/github.com/therealfakemoot/genesis)] |
+|`Go Report`| [![Go Report](https://goreportcard.com/badge/github.com/therealfakemoot/genesis)](https://goreportcard.com/report/github.com/therealfakemoot/genesis) |
 
 # Objective
