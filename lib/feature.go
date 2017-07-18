@@ -37,6 +37,10 @@ type Feature struct {
 	Features []Feature
 }
 
+func (f *Feature) Walk(w WalkFunc, ctx *WalkCtx) error {
+	for _, f := range f.Features {
+		w(&f, *ctx)
+	}
 	return nil
 }
 
