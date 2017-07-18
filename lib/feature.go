@@ -1,5 +1,9 @@
 package genesis
 
+import (
+	"context"
+)
+
 type Point map[string]interface{}
 
 type Movable interface {
@@ -8,6 +12,10 @@ type Movable interface {
 
 type Walkable interface {
 	Walk(func(*Feature) error) error
+}
+
+type WalkCtx struct {
+	context.Context
 }
 
 func NewFeature(locMap map[string]interface{}, args ...interface{}) (*Feature, error) {
