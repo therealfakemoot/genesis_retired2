@@ -11,12 +11,14 @@ type Movable interface {
 }
 
 type Walkable interface {
-	Walk(func(*Feature) error) error
+	Walk(w *Walkable) (walkFunc WalkFunc)
 }
 
 type WalkCtx struct {
 	context.Context
 }
+
+type WalkFunc func(root *Feature, ctx WalkCtx) error
 
 func NewFeature(locMap map[string]interface{}, args ...interface{}) (*Feature, error) {
 	l := new(Feature)
@@ -35,7 +37,7 @@ type Feature struct {
 	Features []Feature
 }
 
-func (l *Feature) Walk(func(*Feature), error) error {
+func (l *Feature) Walk(w WalkFunc) error {
 	return nil
 }
 
@@ -43,6 +45,6 @@ func (l *Feature) Move(p *Point) (*Feature, error) {
 	return moveFeature(l, p)
 }
 
-func moveFeature(l Mover, p *Point) (*Feature, error) {
+func moveFeature(l Movable, p *Point) (*Feature, error) {
 	return nil, nil
 }
