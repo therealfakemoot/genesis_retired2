@@ -21,14 +21,14 @@ type WalkCtx struct {
 type WalkFunc func(root *Feature, ctx WalkCtx) error
 
 func NewFeature(locMap map[string]interface{}, args ...interface{}) (*Feature, error) {
-	l := new(Feature)
+	f := new(Feature)
 
 	//for k, v := range args["LocMap"] {
 	//locMap[k] = v
 	//}
-	l.LocMap = locMap
+	f.LocMap = locMap
 
-	return l, nil
+	return f, nil
 }
 
 type Feature struct {
@@ -37,14 +37,13 @@ type Feature struct {
 	Features []Feature
 }
 
-func (l *Feature) Walk(w WalkFunc) error {
 	return nil
 }
 
-func (l *Feature) Move(p *Point) (*Feature, error) {
-	return moveFeature(l, p)
+func (f *Feature) Move(p *Point) (*Feature, error) {
+	return moveFeature(f, p)
 }
 
-func moveFeature(l Movable, p *Point) (*Feature, error) {
+func moveFeature(f Movable, p *Point) (*Feature, error) {
 	return nil, nil
 }
