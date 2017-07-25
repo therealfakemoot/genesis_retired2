@@ -19,6 +19,7 @@ func LoadConfig(l *logrus.Logger) {
 
 	viper.SetConfigType("yaml")
 	viper.SetEnvPrefix("GENESIS")
+	viper.AutomaticEnv()
 
 	viper.SetDefault("mapDir", "maps")
 	viper.SetDefault("extDirs", "ext")
