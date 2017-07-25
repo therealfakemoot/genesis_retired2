@@ -1,16 +1,25 @@
 package genesis
 
 import (
-	"github.com/apex/log"
-	"github.com/apex/log/handlers/text"
+	"github.com/sirupsen/logrus"
 	//"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"os"
-	"time"
 )
 
-func LoadConfig() {
-	var err error
+// Logger is a stub type for now. One day,
+// it will assist with logging to multiple targets
+// i.e. file AND terminal simultaneously.
+type Logger struct {
+	Term *logrus.Logger
+}
+
+// LoadConfig sets Viper up to read from
+// the env vars, config file, and CLI flags.
+func LoadConfig(l *logrus.Logger) {
+
+	viper.SetConfigType("yaml")
+	viper.SetEnvPrefix("GENESIS")
+
 	viper.SetDefault("mapDir", "maps")
 	viper.SetDefault("extDirs", "ext")
 
@@ -18,23 +27,9 @@ func LoadConfig() {
 	viper.AddConfigPath("$HOME")
 	viper.AddConfigPath(".")
 
-	err = viper.ReadInConfig()
+	err := viper.ReadInConfig()
 
 	if err != nil {
-		log.WithError(err).Error("config load failed")
+		l.WithError(err).Error("Config load failed")
 	}
-}
-
-func SetupLogging() {
-	var err error
-
-	logFileName := "log/" + time.Now().Format("2017-01-01-00:00:00") + ".log"
-	logFile, err := os.Open(logFileName)
-	defer logFile.Close()
-
-	if err != nil {
-		log.WithError(err).Error("opening log file failed")
-	}
-
-	log.SetHandler(text.New(logFile))
 }
