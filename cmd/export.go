@@ -22,7 +22,7 @@ import (
 // exportCmd represents the export command
 var exportCmd = &cobra.Command{
 	Use:   "export",
-	Short: "Export a map using one of the availble plugins.",
+	Short: "Export a map using one of the available plugins.",
 	Long: `Export requires specifying a plugin. Included by default are:
 SVG
 PNG
