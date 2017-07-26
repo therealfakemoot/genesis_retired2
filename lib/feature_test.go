@@ -54,7 +54,7 @@ func TestFeatureWalk(t *testing.T) {
 		walkCount := 0
 
 		walkFunc := func(r *Feature, ctx WalkCtx) error {
-			walkCount += 1
+			walkCount++
 			return nil
 		}
 
