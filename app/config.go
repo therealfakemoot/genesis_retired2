@@ -1,4 +1,4 @@
-package genesis
+package app
 
 import (
 	"github.com/sirupsen/logrus"
@@ -11,6 +11,15 @@ import (
 // i.e. file AND terminal simultaneously.
 type Logger struct {
 	Term *logrus.Logger
+}
+
+// DumpSettings will print all currently set configuration values
+// using the given logger.
+func DumpSettings(l *logrus.Logger) {
+
+	l.WithFields(logrus.Fields{
+		"Settings": viper.AllSettings(),
+	}).Info("All settings")
 }
 
 // LoadConfig sets Viper up to read from
