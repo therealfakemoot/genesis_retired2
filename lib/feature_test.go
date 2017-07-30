@@ -40,6 +40,7 @@ func dummyFeature(x int, y int, z int) *Feature {
 }
 
 func TestFeatureWalk(t *testing.T) {
+	t.Skip("Not implemented.")
 
 	var walkTests = []struct {
 		in  *Feature
