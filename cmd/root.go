@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	genesis "github.com/therealfakemoot/genesis/app"
 	l "github.com/therealfakemoot/genesis/log"
@@ -30,7 +29,7 @@ generation parameters.`,
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
-		fmt.Println(err)
+		l.Term.WithError(err).Info("genesis failed to start")
 		os.Exit(1)
 	}
 }
