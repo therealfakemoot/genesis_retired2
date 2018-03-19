@@ -22,15 +22,17 @@ import (
 // renderCmd represents the render command
 var renderCmd = &cobra.Command{
 	Use:   "render",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Render a map file",
+	Long: `Render a map file according to provided parameters:
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+render all svg -f mapfile
+  Generates an SVG of a given map displaying all available features
+render topo png -f mapfile
+  Generates a PNG topographical map of a given mapfile
+render all web -f mapfile
+`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("render called")
+		fmt.Println("render called successfully")
 	},
 }
 
