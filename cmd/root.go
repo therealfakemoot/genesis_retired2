@@ -54,6 +54,11 @@ func init() {
 			"config": viper.GetString("config"),
 		}).Info("Config filepath")
 
+	l.Term.WithFields(
+		logrus.Fields{
+			"verbose": viper.GetBool("verbose"),
+		}).Info("Verbosity enabled")
+
 }
 
 // initConfig reads in config file and ENV variables if set.
