@@ -4,6 +4,35 @@ import (
 	"math"
 )
 
+// Map is a nested array of float64 values.
+type Map [][]float64
+
+// MapGen will allow for reuse and iterative tweaking of noise generation
+// parameters.
+type MapGen struct {
+	Stretch float64
+	Squish  float64
+	Noise   Noise
+}
+
+// Generate takes x,y coordinates indicating the maximum dimensions of the
+// terrain map to be generated.
+func Generate(mg *MapGen, x float64, y float64) Map {
+	m := Map{}
+	for i := 0.0; i < y; i++ {
+		row := make([]float64, int(x))
+		m[int(i)] = row
+	}
+
+	for xGen := 0.0; xGen < x; xGen++ {
+		for yGen := 0.0; yGen < y; yGen++ {
+			m[int(xGen)][int(yGen)] = mg.Noise.Eval3(xGen, yGen, 0)
+		}
+	}
+
+	return m
+}
+
 /**
  * OpenSimplex Noise in Go.
  * algorithm by Kurt Spencer
