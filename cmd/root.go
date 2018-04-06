@@ -1,13 +1,13 @@
 package cmd
 
 import (
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	genesis "github.com/therealfakemoot/genesis/app"
 	l "github.com/therealfakemoot/genesis/log"
 	"os"
 )
-
-var cfgFile string
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
@@ -40,12 +40,20 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
-	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.genesis.yaml)")
+	RootCmd.PersistentFlags().String("config", "", "config file (default is $HOME/.genesis.yaml)")
 	RootCmd.PersistentFlags().Bool("verbose", false, "Enable verbose logging. [POSSIBLE PERFORMANCE IMPLICATIONS]")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	//RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	viper.BindPFlags(RootCmd.Flags())
+
+	l.Term.WithFields(
+		logrus.Fields{
+			"config": viper.GetString("config"),
+		}).Info("Config filepath")
+
 }
 
 // initConfig reads in config file and ENV variables if set.
