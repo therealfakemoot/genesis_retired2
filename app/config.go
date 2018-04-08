@@ -19,7 +19,7 @@ func DumpSettings(l *logrus.Logger) {
 
 	l.WithFields(logrus.Fields{
 		"Settings": viper.AllSettings(),
-	}).Info("All settings")
+	}).Debug("All settings")
 }
 
 // LoadConfig sets Viper up to read from
