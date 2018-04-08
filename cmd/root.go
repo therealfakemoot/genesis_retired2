@@ -53,17 +53,6 @@ func init() {
 	//RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	viper.BindPFlags(RootCmd.Flags())
-
-	l.Term.WithFields(
-		logrus.Fields{
-			"config": viper.GetString("config"),
-		}).Info("Config filepath")
-
-	l.Term.WithFields(
-		logrus.Fields{
-			"verbose": viper.GetBool("verbose"),
-		}).Info("Verbosity enabled")
-
 }
 
 // initConfig reads in config file and ENV variables if set.
