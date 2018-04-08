@@ -34,7 +34,6 @@ generation parameters.`,
 		}
 
 		genesis.DumpSettings(l.Term)
-
 	},
 }
 
@@ -53,8 +52,8 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
-	RootCmd.PersistentFlags().String("config", "", "config file (default is $HOME/.genesis.yaml)")
-	RootCmd.PersistentFlags().Bool("verbose", false, "Enable verbose logging. [POSSIBLE PERFORMANCE IMPLICATIONS]")
+	RootCmd.Flags().String("config", "", "config file (default is $HOME/.genesis.yaml)")
+	RootCmd.Flags().Bool("verbose", false, "Enable verbose logging. [POSSIBLE PERFORMANCE IMPLICATIONS]")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
