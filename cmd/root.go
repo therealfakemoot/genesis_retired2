@@ -25,6 +25,14 @@ generation parameters.`,
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 
+	},
+	PostRun: func(cmd *cobra.Command, args []string) {
+		for _, key := range viper.AllKeys() {
+			l.Term.WithFields(logrus.Fields{
+				key: viper.Get(key),
+			}).Debug("Parameter found")
+		}
+
 		genesis.DumpSettings(l.Term)
 
 	},
