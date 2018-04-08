@@ -18,6 +18,11 @@ rendering, and exporting maps containing extensible Features and
 generation parameters.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
+	PreRun: func(cmd *cobra.Command, args []string) {
+		if viper.GetBool("verbose") {
+			l.Term.SetLevel(logrus.DebugLevel)
+		}
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 
 		genesis.DumpSettings(l.Term)
