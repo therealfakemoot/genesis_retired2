@@ -17,7 +17,7 @@ A Golang framework for procedurally generating story elements and content.
 
 ## Interactive Mode
 
-Genesis' interactive mode will be a graphic toolkit for creating and manipulating 'map data', ranging from topographical maps to biomes and weather patterns to designing cities, towns, the interiors and exteriors of buildings, and the connections/relationships both spatial and conceptual between all of the aforementioned layers.
+Interactive mode will be a graphic toolkit for creating and manipulating 'map data', ranging from topographical maps to biomes and weather patterns to designing cities, towns, the interiors and exteriors of buildings, and the connections/relationships both spatial and conceptual between all of the aforementioned layers.
 
 ## Library
 
