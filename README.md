@@ -1,6 +1,6 @@
 # genesis
 
-A Golang framework for procedurally generating story elements and content.
+A Golang framework for procedurally generating maps, terrain, story elements and content.
 
 ## Build Status
 | Branch | Status |
