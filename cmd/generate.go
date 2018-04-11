@@ -59,6 +59,16 @@ var generateCmd = &cobra.Command{
 
 			terrainJSONFile.Write(jsonBytes)
 
+			terrainHTMLFile, err := os.OpenFile(o+"/terrain.html", os.O_RDWR|os.O_CREATE, 0644)
+
+			defer terrainHTMLFile.Close()
+
+			if err != nil {
+				l.Term.WithError(err).Error("Failed to open " + o + "/terrain.json")
+			}
+
+			terrain.RenderTopoHTML(terrainHTMLFile)
+
 		case "feature":
 			l.Term.Info("Feature generation not implemented.")
 		}
