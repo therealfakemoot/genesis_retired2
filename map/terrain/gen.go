@@ -1,13 +1,12 @@
 package genesis
 
 import (
-	maps "github.com/therealfakemoot/genesis/map"
 	noise "github.com/therealfakemoot/genesis/noise"
 )
 
-// TerrainMapGen will allow for reuse and iterative tweaking of noise generation
+// MapGen will allow for reuse and iterative tweaking of noise generation
 // parameters.
-type TerrainMapGen struct {
+type MapGen struct {
 	Stretch float64
 	Squish  float64
 	Noise   *noise.Noise
@@ -15,9 +14,9 @@ type TerrainMapGen struct {
 
 // Generate takes x,y coordinates indicating the maximum dimensions of the
 // terrain map to be generated.
-func (mg *TerrainMapGen) Generate(x float64, y float64) maps.TerrainMap {
-	m := maps.TerrainMap{}
-	m.Grid = maps.Grid{X: int(x), Y: int(y), Z: 0}
+func (mg *MapGen) Generate(x float64, y float64) Map {
+	m := Map{}
+	m.Grid = Grid{X: int(x), Y: int(y), Z: 0}
 	points := make([][]float64, int(y))
 	for i := 0.0; i < y; i++ {
 		row := make([]float64, int(x))

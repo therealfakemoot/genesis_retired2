@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	terrain "github.com/therealfakemoot/genesis/map/terrain"
 	noise "github.com/therealfakemoot/genesis/noise"
-	terrain "github.com/therealfakemoot/genesis/terrain"
 	"io/ioutil"
 )
 
