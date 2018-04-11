@@ -4,44 +4,69 @@ import (
 	"encoding/json"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	l "github.com/therealfakemoot/genesis/log"
 	terrain "github.com/therealfakemoot/genesis/map/terrain"
 	noise "github.com/therealfakemoot/genesis/noise"
-	"io/ioutil"
+	"os"
 )
 
 // generateCmd represents the generate command
 var generateCmd = &cobra.Command{
-	Use:   "generate",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:       "generate",
+	Short:     "A brief description of your command",
+	ValidArgs: []string{"all", "terrain", "feature"},
+	Args:      cobra.OnlyValidArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		n := noise.NewWithSeed(4074849863)
-		mg := terrain.MapGen{
-			Stretch: -1.0 / 6,
-			Squish:  1 / 3,
-			Noise:   n,
+
+		if len(args) != 1 {
+			l.Term.Error("Please provide a valid layer.")
 		}
 
-		w := float64(viper.GetInt("width"))
-		h := float64(viper.GetInt("height"))
+		layer := args[0]
 
-		terrainMap := mg.Generate(w, h)
+		switch layer {
+		case "all":
+			l.Term.Info("Full-map generation not implemented.")
+		case "terrain":
+			n := noise.NewWithSeed(4074849863)
+			mg := terrain.MapGen{
+				Stretch: -1.0 / 6,
+				Squish:  1 / 3,
+				Noise:   n,
+			}
 
-		jsonBytes, _ := json.Marshal(terrainMap)
+			w := float64(viper.GetInt("width"))
+			h := float64(viper.GetInt("height"))
 
-		o := viper.GetString("output")
-		ioutil.WriteFile(o+".json", jsonBytes, 0644)
+			terrainMap := mg.Generate(w, h)
+
+			jsonBytes, _ := json.Marshal(terrainMap)
+
+			o := viper.GetString("output")
+
+			err := os.Mkdir(o, 0755)
+
+			if err != nil {
+				l.Term.WithError(err).Error("Failed to create map directory.")
+			}
+
+			terrainJSONFile, err := os.OpenFile(o+"/terrain.json", os.O_RDWR|os.O_CREATE, 0644)
+			defer terrainJSONFile.Close()
+
+			if err != nil {
+				l.Term.WithError(err).Error("Failed to open " + o + "/terrain.json")
+			}
+
+			terrainJSONFile.Write(jsonBytes)
+
+		case "feature":
+			l.Term.Info("Feature generation not implemented.")
+		}
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(generateCmd)
-	generateCmd.AddCommand(terrainCmd)
 
 	generateCmd.Flags().StringP("output", "o", "", "Name of output file")
 	generateCmd.Flags().Int("width", 1000, "Horizontal width of generated map")
