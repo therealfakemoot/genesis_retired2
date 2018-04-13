@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	l "github.com/therealfakemoot/genesis/log"
@@ -14,7 +15,7 @@ import (
 var generateCmd = &cobra.Command{
 	Use:       "generate",
 	Short:     "A brief description of your command",
-	ValidArgs: []string{"all", "terrain", "feature"},
+	ValidArgs: []string{"all", "test", "terrain", "feature"},
 	Args:      cobra.OnlyValidArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -27,8 +28,28 @@ var generateCmd = &cobra.Command{
 		switch layer {
 		case "all":
 			l.Term.Info("Full-map generation not implemented.")
+		case "test":
+			for i := .1; i < 10; i += .1 {
+				n := noise.NewWithSeed(18006665432)
+
+				mg := terrain.MapGen{
+					Stretch: -1.0 / 6,
+					Squish:  1 / 3,
+					Noise:   n,
+				}
+
+				w := float64(viper.GetInt("width"))
+				h := float64(viper.GetInt("height"))
+				terrainMap := mg.Generate(w, h, i, 10.0)
+				// s, _ := json.Marshal(terrainMap)
+
+				// fmt.Println(string(s))
+
+				fmt.Println(fmt.Sprintf("sampleScale: %f", i))
+				fmt.Println(fmt.Sprintf("%s", terrainMap))
+			}
 		case "terrain":
-			n := noise.NewWithSeed(4074849863)
+			n := noise.NewWithSeed(18006665432)
 			mg := terrain.MapGen{
 				Stretch: -1.0 / 6,
 				Squish:  1 / 3,
@@ -38,7 +59,7 @@ var generateCmd = &cobra.Command{
 			w := float64(viper.GetInt("width"))
 			h := float64(viper.GetInt("height"))
 
-			terrainMap := mg.Generate(w, h)
+			terrainMap := mg.Generate(w, h, 2, 10.0)
 
 			jsonBytes, _ := json.Marshal(terrainMap)
 
