@@ -81,6 +81,14 @@ func init() {
 	generateCmd.Flags().StringP("output", "o", "", "Name of output file")
 	generateCmd.Flags().Int("width", 1000, "Horizontal width of generated map")
 	generateCmd.Flags().Int("height", 1000, "Vertical height of generated map")
+	generateCmd.Flags().Int("sample", 2, "Vertical height of generated map")
+	generateCmd.Flags().Int("threshold", 10, "Vertical height of generated map")
+
+	// generateCmd.MarkFlagRequired("width")
+	// generateCmd.MarkFlagRequired("height")
+	// generateCmd.MarkFlagRequired("sample")
+	// generateCmd.MarkFlagRequired("threshold")
+	generateCmd.MarkFlagRequired("output")
 
 	viper.BindPFlags(generateCmd.Flags())
 	// Here you will define your flags and configuration settings.
