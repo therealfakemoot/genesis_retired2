@@ -1,6 +1,9 @@
 package genesis
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 func flatten(source [][]float64) []float64 {
 	r := make([]float64, len(source)*len(source[0]))
@@ -33,6 +36,20 @@ func (m Map) MarshalJSON() ([]byte, error) {
 	mj.Values = flatten(m.Points)
 
 	return json.Marshal(mj)
+}
+
+func (m Map) String() string {
+
+	s := ""
+
+	grid, _ := json.Marshal(m.Grid)
+	s += string(grid)
+	s += "\n"
+	for _, r := range m.Points {
+		s += fmt.Sprintf("%v", r) + "\n"
+	}
+
+	return s
 }
 
 // RenderHTML creates an HTML file that displays a contour map of the terrain data.
