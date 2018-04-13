@@ -14,7 +14,7 @@ type MapGen struct {
 
 // Generate takes x,y coordinates indicating the maximum dimensions of the
 // terrain map to be generated.
-func (mg *MapGen) Generate(x float64, y float64) Map {
+func (mg *MapGen) Generate(x, y, sampleScale, thresholdScale float64) Map {
 	m := Map{}
 	m.Grid = Grid{X: int(x), Y: int(y), Z: 0}
 	points := make([][]float64, int(y))
@@ -27,7 +27,7 @@ func (mg *MapGen) Generate(x float64, y float64) Map {
 
 	for xGen := 0.0; xGen < x; xGen++ {
 		for yGen := 0.0; yGen < y; yGen++ {
-			m.Points[int(xGen)][int(yGen)] = mg.Noise.Eval3(xGen, yGen, 0)
+			m.Points[int(xGen)][int(yGen)] = (mg.Noise.Eval3(xGen*sampleScale, yGen*sampleScale, 0) + 1) * thresholdScale
 		}
 	}
 
