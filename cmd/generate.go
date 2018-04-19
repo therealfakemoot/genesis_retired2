@@ -63,29 +63,29 @@ var generateCmd = &cobra.Command{
 
 			jsonBytes, _ := json.Marshal(terrainMap)
 
-			o := viper.GetString("output")
+			outFile := viper.GetString("mapDir")
 
-			err := os.Mkdir(o, 0755)
+			err := os.Mkdir(outFile, 0755)
 
 			if err != nil {
 				l.Term.WithError(err).Error("Failed to create map directory.")
 			}
 
-			terrainJSONFile, err := os.OpenFile(o+"/terrain.json", os.O_RDWR|os.O_CREATE, 0644)
+			terrainJSONFile, err := os.OpenFile(outFile+"/terrain.json", os.O_RDWR|os.O_CREATE, 0644)
 			defer terrainJSONFile.Close()
 
 			if err != nil {
-				l.Term.WithError(err).Error("Failed to open " + o + "/terrain.json")
+				l.Term.WithError(err).Error("Failed to open " + outFile + "/terrain.json")
 			}
 
 			terrainJSONFile.Write(jsonBytes)
 
-			terrainHTMLFile, err := os.OpenFile(o+"/terrain.html", os.O_RDWR|os.O_CREATE, 0644)
+			terrainHTMLFile, err := os.OpenFile(outFile+"/terrain.html", os.O_RDWR|os.O_CREATE, 0644)
 
 			defer terrainHTMLFile.Close()
 
 			if err != nil {
-				l.Term.WithError(err).Error("Failed to open " + o + "/terrain.json")
+				l.Term.WithError(err).Error("Failed to open " + outFile + "/terrain.json")
 			}
 
 			terrain.RenderTopoHTML(terrainHTMLFile)
@@ -99,13 +99,13 @@ var generateCmd = &cobra.Command{
 func init() {
 	RootCmd.AddCommand(generateCmd)
 
-	generateCmd.Flags().StringP("output", "o", "", "Name of output file")
+	generateCmd.Flags().StringP("mapDir", "o", "", "Name of output file")
 	generateCmd.Flags().Int("mapX", 1000, "Horizontal width of generated map")
 	generateCmd.Flags().Int("mapY", 1000, "Vertical height of generated map")
 	generateCmd.Flags().Int("sample", 2, "Vertical height of generated map")
 	generateCmd.Flags().Int("threshold", 10, "Vertical height of generated map")
 
-	generateCmd.MarkFlagRequired("output")
+	generateCmd.MarkFlagRequired("mapDir")
 
 	// Here you will define your flags and configuration settings.
 

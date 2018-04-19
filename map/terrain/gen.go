@@ -27,7 +27,8 @@ func (mg *MapGen) Generate(x, y, sampleScale, thresholdScale float64) Map {
 
 	for xGen := 0.0; xGen < x; xGen++ {
 		for yGen := 0.0; yGen < y; yGen++ {
-			m.Points[int(xGen)][int(yGen)] = (mg.Noise.Eval3(xGen*sampleScale, yGen*sampleScale, 0) + 1) * thresholdScale
+			// m.Points[int(xGen)][int(yGen)] = float64(float32((mg.Noise.Eval3(xGen*sampleScale, yGen*sampleScale, 0) + 1) * thresholdScale))
+			m.Points[int(xGen)][int(yGen)] = mg.Noise.Eval3(xGen*sampleScale, yGen*sampleScale, 0)
 		}
 	}
 
