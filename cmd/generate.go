@@ -38,8 +38,8 @@ var generateCmd = &cobra.Command{
 					Noise:   n,
 				}
 
-				w := float64(viper.GetInt("width"))
-				h := float64(viper.GetInt("height"))
+				w := float64(viper.GetInt("mapX"))
+				h := float64(viper.GetInt("mapY"))
 				terrainMap := mg.Generate(w, h, i, 10.0)
 				// s, _ := json.Marshal(terrainMap)
 
@@ -56,8 +56,8 @@ var generateCmd = &cobra.Command{
 				Noise:   n,
 			}
 
-			w := float64(viper.GetInt("width"))
-			h := float64(viper.GetInt("height"))
+			w := float64(viper.GetInt("mapX"))
+			h := float64(viper.GetInt("mapY"))
 
 			terrainMap := mg.Generate(w, h, 2, 10.0)
 
@@ -100,15 +100,11 @@ func init() {
 	RootCmd.AddCommand(generateCmd)
 
 	generateCmd.Flags().StringP("output", "o", "", "Name of output file")
-	generateCmd.Flags().Int("width", 1000, "Horizontal width of generated map")
-	generateCmd.Flags().Int("height", 1000, "Vertical height of generated map")
+	generateCmd.Flags().Int("mapX", 1000, "Horizontal width of generated map")
+	generateCmd.Flags().Int("mapY", 1000, "Vertical height of generated map")
 	generateCmd.Flags().Int("sample", 2, "Vertical height of generated map")
 	generateCmd.Flags().Int("threshold", 10, "Vertical height of generated map")
 
-	// generateCmd.MarkFlagRequired("width")
-	// generateCmd.MarkFlagRequired("height")
-	// generateCmd.MarkFlagRequired("sample")
-	// generateCmd.MarkFlagRequired("threshold")
 	generateCmd.MarkFlagRequired("output")
 
 	// Here you will define your flags and configuration settings.
