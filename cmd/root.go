@@ -18,6 +18,9 @@ rendering, and exporting maps containing extensible Features and
 generation parameters.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		viper.BindPFlags(cmd.Flags())
+	},
 	PreRun: func(cmd *cobra.Command, args []string) {
 		if viper.GetBool("verbose") {
 			l.Term.SetLevel(logrus.DebugLevel)
@@ -59,7 +62,6 @@ func init() {
 	// when this action is called directly.
 	//RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
-	viper.BindPFlags(RootCmd.Flags())
 }
 
 // initConfig reads in config file and ENV variables if set.

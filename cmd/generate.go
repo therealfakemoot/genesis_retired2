@@ -111,7 +111,6 @@ func init() {
 	// generateCmd.MarkFlagRequired("threshold")
 	generateCmd.MarkFlagRequired("output")
 
-	viper.BindPFlags(generateCmd.Flags())
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
