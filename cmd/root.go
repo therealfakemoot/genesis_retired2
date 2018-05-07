@@ -20,11 +20,14 @@ generation parameters.`,
 	// has an action associated with it:
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		viper.BindPFlags(cmd.Flags())
-	},
-	PreRun: func(cmd *cobra.Command, args []string) {
+
+		viper.BindPFlag("verbose", cmd.Flags().Lookup("verbose"))
+
 		if viper.GetBool("verbose") {
 			l.Term.SetLevel(logrus.DebugLevel)
 		}
+	},
+	PreRun: func(cmd *cobra.Command, args []string) {
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -56,7 +59,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 	RootCmd.Flags().String("config", "", "config file (default is $HOME/.genesis.yaml)")
-	RootCmd.Flags().Bool("verbose", false, "Enable verbose logging. [POSSIBLE PERFORMANCE IMPLICATIONS]")
+	RootCmd.PersistentFlags().Bool("verbose", false, "Enable verbose logging. [POSSIBLE PERFORMANCE IMPLICATIONS]")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
