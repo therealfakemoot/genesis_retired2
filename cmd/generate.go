@@ -3,12 +3,14 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+
+	noise "github.com/ojrac/opensimplex-go"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
 	l "github.com/therealfakemoot/genesis/log"
 	terrain "github.com/therealfakemoot/genesis/map/terrain"
-	noise "github.com/therealfakemoot/genesis/noise"
-	"os"
 )
 
 // generateCmd represents the generate command
@@ -30,7 +32,7 @@ var generateCmd = &cobra.Command{
 			l.Term.Info("Full-map generation not implemented.")
 		case "test":
 			for i := .1; i < 10; i += .1 {
-				n := noise.NewWithSeed(18006665432)
+				n := noise.New(18006665432)
 
 				mg := terrain.MapGen{
 					Stretch: -1.0 / 6,
@@ -49,7 +51,7 @@ var generateCmd = &cobra.Command{
 				fmt.Println(fmt.Sprintf("%s", terrainMap))
 			}
 		case "terrain":
-			n := noise.NewWithSeed(18006665432)
+			n := noise.New(18006665432)
 			mg := terrain.MapGen{
 				Stretch: -1.0 / 6,
 				Squish:  1 / 3,

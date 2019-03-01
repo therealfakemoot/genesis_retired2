@@ -2,10 +2,10 @@ package genesis
 
 import (
 	"fmt"
+	noise "github.com/ojrac/opensimplex-go"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	l "github.com/therealfakemoot/genesis/log"
-	noise "github.com/therealfakemoot/genesis/noise"
 	Q "github.com/therealfakemoot/go-quantize"
 )
 
@@ -14,7 +14,7 @@ import (
 type MapGen struct {
 	Stretch float64
 	Squish  float64
-	Noise   *noise.Noise
+	Noise   noise.Noise
 }
 
 // Generate takes x,y coordinates indicating the maximum dimensions of the
@@ -37,7 +37,7 @@ func (mg *MapGen) Generate(x, y, sampleScale, thresholdScale float64) Map {
 	for yGen := 0.0; yGen < y; yGen++ {
 		row := make([]float64, int(x))
 		for xGen := 0.0; xGen < x; xGen++ {
-			row[int(xGen)] = mg.Noise.Eval3(xGen*sampleScale, yGen*sampleScale, 0)
+			row[int(xGen)] = mg.Noise.Eval2(xGen*sampleScale, yGen*sampleScale)
 		}
 		quantized := d.Quantize(row)
 
